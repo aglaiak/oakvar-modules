@@ -19,10 +19,15 @@ developer:
     website: 'https://www.cancerhotspots.org/'
     citation: 'Chang et al., Accelerating discovery of functional mutant alleles in cancer. Cancer Discovery, 10.1158/2159-8290.CD-17-0321 (2017).'
 output_columns:
+- name: qvalue
+  title: Qvalue
+  desc: Measure of significance for hotspots that arise in multiple tumor types of a single organ system. Estimated from p-values produced by the binomial model
+- name: log10_pvalue
+  title: Log10 p-value
+  desc: Empirically derived p-value for co-occurrence, generated as the number of times co-occurrence was observed equal to or more often in this null distribution compared to that of the observed data
 - name: samples
-  title: Cancer Types
-  type: string
-  desc: Distinct cancer type and count associated with each variant. 
+  title: Samples
+  desc: Sample types that harbor this mutation
   width: 120
   table: true
   table_headers:
