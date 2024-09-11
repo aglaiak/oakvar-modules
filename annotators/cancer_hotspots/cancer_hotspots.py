@@ -1,6 +1,5 @@
 from oakvar import BaseAnnotator
 import sqlite3
-
 class Annotator(BaseAnnotator):
     def annotate(self, input_data, secondary_data=None):
         _ = secondary_data
@@ -16,12 +15,13 @@ class Annotator(BaseAnnotator):
         else:
             table = "INDELs"
 
-        q = f"select samples, qvalue, log10_pvalue from {table} where hugo = '{input_data['hugo']}' and achange= '{input_data['achange']}'"
+        q = f"SELECT samples, qvalue, log10_pvalue FROM {table} WHERE hugo_symbol = '{input_data['hugo']}' AND base_achange= '{input_data['achange']}'"
 
         self.cursor.execute(q)
         row = self.cursor.fetchone()
         if row:
-            out = {"samples": samples, "qvalue": qvalue, "pvalue" : pvalue}
+            samples, qvalue, log10_pvalue = row
+            out = {"samples": samples, "qvalue": qvalue, "pvalue" : log10_pvalue}
         else:
             out = None
         return out
